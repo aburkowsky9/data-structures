@@ -12,16 +12,22 @@ describe('set', function() {
   });
 
   it('should add values to a set', function() {
-    set.add('Susan Sarandon');
-    set.add('Danny Glover');
+    set.add('Susan Sarandon', 'Susan Sarandon');
+    set.add('Danny Glover', 'Danny Glover');
     expect(set.contains('Danny Glover')).to.equal(true);
     expect(set.contains('Susan Sarandon')).to.equal(true);
   });
 
   it('should remove values from a set', function() {
-    set.add('Mel Gibson');
+    set.add('Mel Gibson', 'Mel Gibson');
     set.remove('Mel Gibson');
     expect(set.contains('Mel Gibson')).to.equal(false);
+  });
+  
+  it('should not have multiple values in set', function() {
+    set.add('a', 'a');
+    set.add('a1', 'a');
+    
   });
 
 });

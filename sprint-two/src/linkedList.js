@@ -2,7 +2,7 @@ var LinkedList = function() {
   var list = {};
   list.head = list.tail = null;
 
-  list.addToTail = function(value) {
+  list.addToTail = function(value) { // O(1)
     if (!list.head) {
       list.head = list.tail = new Node(value); 
     } else {
@@ -12,13 +12,13 @@ var LinkedList = function() {
     }
   };
 
-  list.removeHead = function() {
+  list.removeHead = function() { // O(1)
     const removed = list.head.value;
     list.head = list.head.next;
     return removed;
   };
 
-  list.contains = function(target) {
+  list.contains = function(target) { // O(n)
     let node = list.head;
     while (node) {
       if (node.value === target) {
@@ -40,10 +40,6 @@ var Node = function(value) {
   return node;
 };
 
-var linkedList = LinkedList();
-linkedList.addToTail(1);
-linkedList.addToTail(2);
-linkedList.removeHead();
 /*
    * Complexity: What is the time complexity of the above functions?
    */
