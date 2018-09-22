@@ -1,16 +1,38 @@
-var HashTable = function() {
-  this._limit = 8;
+var HashTable = function(limit) {
+  this._limit = limit || 8;
   this._storage = LimitedArray(this._limit);
   this._size = 0;
 };
 
+HashTable.prototype.double = function() {
+  var newLimit = this._limit * 2;
+  var newHash = new HashTable(newLimit);
+  this._limit = newHash._limit;
+  
+  this._storage.each(function(bucket, index, storage) {
+    if (bucket !== undefined) {
+      for (var i = 0; i < bucket.length; i++) { 
+        const tuple = bucket[i];
+        newHash.insert(tuple[0], tuple[1]);  
+      }
+    }
+  });
+ 
+  this._storage = newHash._storage;
+  this._size = newHash._size;
+};
+
 HashTable.prototype.insert = function(k, v) {
   var index = getIndexBelowMaxForKey(k, this._limit);
+  
+  if (this._size >= (0.75 * this._limit)) {
+    this.double();
+    index = getIndexBelowMaxForKey(k, this._limit);
+  } 
+  
   let bucket = this._storage.get(index);
   let doesExist = false;
-  // if (this._size >= (0.75 * this._limit)) {
-  //   this._limit *= 2;
-  // }
+  
   if (!bucket) {
     bucket = [];
     this._storage.set(index, bucket);
@@ -40,8 +62,32 @@ HashTable.prototype.retrieve = function(k) {
   return undefined;
 };
 
+HashTable.prototype.half = function() {
+  var newLimit = this._limit / 2;
+  var newHash = new HashTable(newLimit);
+  this._limit = newHash._limit;
+  
+  this._storage.each(function(bucket, index, storage) {
+    if (bucket !== undefined) {
+      for (var i = 0; i < bucket.length; i++) { 
+        const tuple = bucket[i];
+        newHash.insert(tuple[0], tuple[1]);  
+      }
+    }
+  });
+ 
+  this._storage = newHash._storage;
+  this._size = newHash._size;
+};
+
 HashTable.prototype.remove = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
+  
+  if (this._size <= (0.25 * this._limit)) {
+    this.half();
+    index = getIndexBelowMaxForKey(k, this._limit);
+  }
+  
   let bucket = this._storage.get(index);
   for (let i = 0; i < bucket.length; i += 1) {
     let tuple = bucket[i];

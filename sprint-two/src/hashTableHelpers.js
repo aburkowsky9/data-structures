@@ -47,6 +47,8 @@ var LimitedArray = function(limit) {
 // to turn any string into an integer that is well-distributed between the
 // numbers 0 and `max`
 var getIndexBelowMaxForKey = function(str, max) {
+  // console.log('str', str)
+  // console.log('max', max)
   var hash = 0;
   for (var i = 0; i < str.length; i++) {
     hash = (hash << 5) + hash + str.charCodeAt(i);
