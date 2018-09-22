@@ -26,7 +26,3 @@ treeMethods.contains = function(target) { // O(n);
   hasChild(this);
   return wasFound;
 };
-
-/*
- * Complexity: What is the time complexity of the above functions?
- */

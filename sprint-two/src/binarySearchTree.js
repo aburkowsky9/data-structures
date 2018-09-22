@@ -51,11 +51,3 @@ BinarySearchTree.prototype.helper = function(node, cb) {
   this.helper(node.right, cb);
 };
 
-var bst = new BinarySearchTree(5);
-bst.insert(null);
-bst.insert(null)
-
-/*
- * Complexity: What is the time complexity of the above functions?
- * 
- */

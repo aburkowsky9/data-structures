@@ -27,7 +27,5 @@ describe('set', function() {
   it('should not have multiple values in set', function() {
     set.add('a', 'a');
     set.add('a1', 'a');
-    
   });
-
 });

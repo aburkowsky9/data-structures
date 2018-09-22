@@ -39,7 +39,3 @@ var Node = function(value) {
 
   return node;
 };
-
-/*
-   * Complexity: What is the time complexity of the above functions?
-   */

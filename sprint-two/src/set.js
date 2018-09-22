@@ -6,8 +6,13 @@ var Set = function() {
 
 var setPrototype = {};
 
-setPrototype.add = function(key, value) { // O(1)
-  this._storage[key] = value;
+setPrototype.add = function(item, val) { // O(n)
+  for (var key in this._storage) {
+    if (this._storage[key] === val) {
+      delete this._storage[item];
+    }
+  }
+  this._storage[item] = val;
 };
 
 setPrototype.contains = function(item) { // O(1)
@@ -17,7 +22,3 @@ setPrototype.contains = function(item) { // O(1)
 setPrototype.remove = function(item) { // O(1)
   delete this._storage[item];
 };
-
-/*
- * Complexity: What is the time complexity of the above functions?
- */
