@@ -8,7 +8,7 @@ var LinkedList = function() {
     } else {
       const newNode = new Node(value);
       list.tail.next = newNode;
-      list.tail = newNode;
+      list.tail = this.tail.next;
     }
   };
 
