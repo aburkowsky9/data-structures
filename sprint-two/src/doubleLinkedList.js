@@ -90,6 +90,5 @@ var DbLinkedList = function() {
   return list;
 };
 
-var doubly = new DbLinkedList();
-doubly.addToTail(1)
+
 
